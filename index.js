@@ -3,3 +3,8 @@ let counter = 0;
             counter++;
             document.getElementById("counterDisplay").innerText = `you clicked me ${counter} times`;
         }
+let count = 0;
+function btn(){
+    count++;
+    document.getElementById("save-btn").innerText = count;
+}

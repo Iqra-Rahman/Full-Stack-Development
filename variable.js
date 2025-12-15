@@ -21,3 +21,11 @@ const digit = 44;
 console.log(digit) 
 // digit = 100;  //TypeError: Assignment to constant variable.
 // console.log(digit)
+
+
+// EXERSISE1:
+console.log("------------------Exercise 1------------------")
+let myAge = 25;
+let humanDogRatio = 7;
+let myDogAge = myAge * humanDogRatio;
+console.log(myDogAge)
