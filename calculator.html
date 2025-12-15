@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+
+<body>
+    <h1 id="header"></h1>
+    <input type="number" placeHolder="Enter first number" id="num1">
+    <input type="number" placeHolder="Enter second number" id="num2">
+    <textarea id="result" placeHolder="Result will be shown here"></textarea><br>
+    <button id="addBtn">+</button>
+    <button id="subBtn">-</button>
+    <button id="mulBtn">*</button>
+    <button id="divBtn">/</button>
+
+    <script>
+        let user = "Alex";
+        let message = "Let's do some math, ";
+        document.getElementById("header").innerText = message + user + "!";
+
+        let result;
+
+        document.getElementById("addBtn").onclick = function () {
+            let num1 = Number(document.getElementById("num1").value);
+            let num2 = Number(document.getElementById("num2").value);
+            result = num1 + num2;
+            document.getElementById("result").value = result;
+        }
+        document.getElementById("subBtn").onclick = function () {
+            let num1 = Number(document.getElementById("num1").value);
+            let num2 = Number(document.getElementById("num2").value);
+            result = num1 - num2;
+            document.getElementById("result").value = result;
+        }
+        document.getElementById("mulBtn").onclick = function () {
+            let num1 = Number(document.getElementById("num1").value);
+            let num2 = Number(document.getElementById("num2").value);
+            result = num1 * num2;
+            document.getElementById("result").value = result;
+        }
+        document.getElementById("divBtn").onclick = function () {
+            let num1 = Number(document.getElementById("num1").value);
+            let num2 = Number(document.getElementById("num2").value);
+            result = num1 / num2;
+            document.getElementById("result").value = result;
+        }
+
+    </script>
+</body>
+
+</html>

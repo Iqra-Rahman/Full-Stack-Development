@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>welcome</title>
+</head>
+<body>
+    <h1 id="welcome"></h1>
+    <p id="countClick">0</p>
+    <button id="increment">Increment</button>
+    <button id="save">Save</button>
+    <p id="savePoints">save points: </p>
+
+
+    <script>
+        let user = "Hera";
+        let message = "Welcome back, ";
+        document.getElementById("welcome").innerText = message+user+"!";
+
+        var count = 0;
+        document.getElementById("increment").onclick = function(){
+            document.getElementById("countClick").innerText = count++;
+        }
+
+        document.getElementById("save").onclick = function(){
+            document.getElementById("savePoints").innerText += count + " - ";
+            count = 0;
+            document.getElementById("countClick").innerText = count;
+        }
+    </script>
+</body>
+</html>
