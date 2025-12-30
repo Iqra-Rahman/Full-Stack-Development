@@ -1,0 +1,26 @@
+#game{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(10, 106, 2);
+    font-size: 30px;
+
+}
+#heading{
+    color: goldenrod;
+}
+p{
+    color: white;
+    font-weight: bold;
+}
+.btn{
+    width: 250px;
+    padding: 10px 40px;
+    margin-bottom: 10px;
+    font-size:25px;
+    color:rgb(10, 106, 2);
+    border:solid 2px black;
+    background-color: goldenrod;
+    border-radius: 20px;
+}
