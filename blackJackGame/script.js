@@ -7,6 +7,15 @@ let messageEl = document.getElementById("message")
 let sumEl = document.getElementById("sum-el")
 let cardEl = document.getElementById("card-el")
 
+let player ={
+    name: "Per",
+    chips: 145
+}
+
+let playerEl = document.getElementById("player-el");
+playerEl.textContent  = player.name + " | $" + player.chips 
+// console.log(player.chips)
+
 function getRandomCard() {
     return Math.floor(Math.random() * 10) + 1
 }
