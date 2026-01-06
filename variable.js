@@ -31,7 +31,7 @@ let myDogAge = myAge * humanDogRatio;
 console.log(myDogAge)
 
 
-const myNumber;
+// const myNumber;
 console.log(myNumber);
 myNumber = 101234567;
 
