@@ -1,0 +1,154 @@
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# \l
+                                                                     List of databases
+    Name     |  Owner   | Encoding | Locale Provider |          Collate           |           Ctype            | Locale | ICU Rules |
+Access privileges
+-------------+----------+----------+-----------------+----------------------------+----------------------------+--------+-----------+---
+--------------------
+ college     | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           |
+ my_database | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           |
+ postgres    | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           |
+ template0   | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           | =c
+/postgres          +
+             |          |          |                 |                            |                            |        |           | po
+stgres=CTc/postgres
+ template1   | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           | =c
+/postgres          +
+             |          |          |                 |                            |                            |        |           | po
+stgres=CTc/postgres
+(5 rows)
+
+
+postgres=# \c college
+You are now connected to database "college" as user "postgres".
+college=# \dt
+           List of tables
+ Schema |  Name   | Type  |  Owner
+--------+---------+-------+----------
+ public | Faculty | table | postgres
+ public | student | table | postgres
+(2 rows)
+
+
+college=# select * from student;
+ student_id |  name
+------------+--------
+          1 | iqra
+          2 | ayesha
+(2 rows)
+
+
+college=# select * from faculty;
+ERROR:  relation "faculty" does not exist
+LINE 1: select * from faculty;
+                      ^
+college=# \d
+                   List of relations
+ Schema |          Name          |   Type   |  Owner
+--------+------------------------+----------+----------
+ public | Faculty                | table    | postgres
+ public | Faculty_id_seq         | sequence | postgres
+ public | student                | table    | postgres
+ public | student_student_id_seq | sequence | postgres
+(4 rows)
+
+
+college=# \d faculty
+Did not find any relation named "faculty".
+college=# \d Faculty
+Did not find any relation named "Faculty".
+college=# \d "Faculty"
+                                       Table "public.Faculty"
+  Column   |           Type           | Collation | Nullable |                Default
+-----------+--------------------------+-----------+----------+---------------------------------------
+ id        | integer                  |           | not null | nextval('"Faculty_id_seq"'::regclass)
+ firstName | character varying(255)   |           | not null |
+ lastName  | character varying(255)   |           |          |
+ courses   | character varying(255)   |           | not null |
+ createdAt | timestamp with time zone |           | not null |
+ updatedAt | timestamp with time zone |           | not null |
+Indexes:
+    "Faculty_pkey" PRIMARY KEY, btree (id)
+
+
+college=# insert into Faculty(firstName, lastName, courses)
+college-# values
+college-# ("Neha", "Mishra", "Physics),"
+college(# ("Aditya", "Chauhan", "Mathematics"),
+college(# ("Rajiv", "Mishra", "Computer Science"),
+college(# ("Palak", "Chauhan", "Artificial Inteligence");
+college(# ;
+college(# ("Neha", "Mishra", "Physics),"\r
+Query buffer reset (cleared).
+college=# insert into Faculty(firstName, lastName, courses)
+college-# values
+college-# ("Neha", "Mishra", "Physics"),
+college-# ("Aditya", "Chauhan", "Mathematics"),
+college-# ("Rajiv", "Mishra", "Computer Science"),
+college-# ("Palak", "Chauhan", "Artificial Inteligence");
+ERROR:  relation "faculty" does not exist
+LINE 1: insert into Faculty(firstName, lastName, courses)
+                    ^
+college=# insert into "Faculty"(firstName, lastName, courses)
+college-# ("Neha", "Mishra", "Physics"),
+college-# ("Aditya", "Chauhan", "Mathematics"),
+college-# ("Rajiv", "Mishra", "Computer Science"),
+college-# ("Palak", "Chauhan", "Artificial Inteligence");
+ERROR:  syntax error at or near ""Neha""
+LINE 2: ("Neha", "Mishra", "Physics"),
+         ^
+college=# insert into "Faculty"(firstName, lastName, courses)
+college-# ('Neha', 'Mishra', 'Physics'),
+college-# ('Aditya', 'Chauhan', 'Mathematics'),
+college-# ('Rajiv', 'Mishra', 'Computer Science'),
+college-# ('Palak', 'Chauhan', 'Artificial Inteligence');
+ERROR:  syntax error at or near "'Neha'"
+LINE 2: ('Neha', 'Mishra', 'Physics'),
+         ^
+college=# INSERT INTO "Faculty" (firstName, lastName, courses)
+college-# VALUES
+college-# ('Neha', 'Mishra', 'Physics'),
+college-# ('Aditya', 'Chauhan', 'Mathematics'),
+college-# ('Rajiv', 'Mishra', 'Computer Science'),
+college-# ('Palak', 'Chauhan', 'Artificial Intelligence');
+ERROR:  column "firstname" of relation "Faculty" does not exist
+LINE 1: INSERT INTO "Faculty" (firstName, lastName, courses)
+                               ^
+college=# INSERT INTO "Faculty" ("firstName", "lastName", "courses")
+college-# VALUES
+college-# ('Neha', 'Mishra', 'Physics'),
+college-# ('Aditya', 'Chauhan', 'Mathematics'),
+college-# ('Rajiv', 'Mishra', 'Computer Science'),
+college-# ('Palak', 'Chauhan', 'Artificial Intelligence');
+ERROR:  null value in column "createdAt" of relation "Faculty" violates not-null constraint
+DETAIL:  Failing row contains (1, Neha, Mishra, Physics, null, null).
+college=#
+college=# INSERT INTO "Faculty" ("firstName", "lastName", "courses", "createdAt", "updatedAt")
+college-# VALUES
+college-# ('Neha', 'Mishra', 'Physics', NOW(), NOW()),
+college-# ('Aditya', 'Chauhan', 'Mathematics', NOW(), NOW()),
+college-# ('Rajiv', 'Mishra', 'Computer Science', NOW(), NOW()),
+college-# ('Palak', 'Chauhan', 'Artificial Intelligence', NOW(), NOW());
+INSERT 0 4
+college=#
+college=# alter table "Faculty"
+college-# drop column "createdAt";
+ALTER TABLE
+college=# alter table "Faculty"
+college-# drop column "updatedAt";
+ALTER TABLE
+college=# \d "Faculty"
+                                      Table "public.Faculty"
+  Column   |          Type          | Collation | Nullable |                Default
+-----------+------------------------+-----------+----------+---------------------------------------
+ id        | integer                |           | not null | nextval('"Faculty_id_seq"'::regclass)
+ firstName | character varying(255) |           | not null |
+ lastName  | character varying(255) |           |          |
+ courses   | character varying(255) |           | not null |
+Indexes:
+    "Faculty_pkey" PRIMARY KEY, btree (id)
+
+
+college=#
