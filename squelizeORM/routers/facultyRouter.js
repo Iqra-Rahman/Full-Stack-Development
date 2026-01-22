@@ -1,9 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const {Faculty} = require('../models/faculty');
-const facultyController = require("../controllers/facultyController");
+const Faculty = require('../models/faculty');
 
-router.get("/faculty&Dept", facultyController.getFacultyWithDepartment);
 
 // get all faculty
 router.get('/', async (req, res) => {
